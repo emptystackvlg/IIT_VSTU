@@ -10,8 +10,6 @@ unsigned long long factorial(unsigned long long i)
 }
 
 
-
-
 unsigned long long combination(unsigned long long n, unsigned long long m)
 {
 	if (m == 0 || m == n) return 1;
@@ -24,6 +22,17 @@ unsigned long long allocate_repeat(unsigned long long n, unsigned long long m)
 
 	unsigned long long num_of_allocations = pow(n, m);
 	return num_of_allocations;
+}
+
+unsigned long long permutation_repeat(unsigned long long n, unsigned long long M[20], int k)
+{
+	unsigned long long up = factorial(n);
+	unsigned long long result = 1;
+	for (int i = 0; i < k; i++)
+	{
+		result = up /= factorial(M[i]);
+	}
+	return result;
 }
 void main()
 {
