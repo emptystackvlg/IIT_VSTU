@@ -26,10 +26,12 @@ unsigned long long permutation_repeat(unsigned long long n, int k , unsigned lon
 {
 	unsigned long long up = factorial(n);
 	unsigned long long result = 1;
+	int max_mi = n;
 	for (int i = 0; i < k; i++)
-	{
-		cout << "Введите число";
+	{	
+		cout << "Введите число m_" <<i+1<<"(<="<<max_mi<<")"<< "\n>";
 		cin >> M[i];
+		max_mi -= M[i];
 	}
 	for (int i = 0; i < k; i++)
 	{
@@ -50,6 +52,7 @@ int main()
 		{
 			system("cls");
 			cout << "Выбраны сочетания без повторений" << endl;
+			cout << "Формула для вычислений\nC_(n)^(m) = (n!)/(m!(n-m)!)"<<endl;
 			unsigned long long n = 0;
 			unsigned long long m = 0;
 			cout << "\nВведите n \n>";
@@ -62,6 +65,7 @@ int main()
 		{
 			system("cls");
 			cout << "Выбраны размещения с повторениями" << endl;
+			cout << "Формула для вычислений\nA_(n)^(m)=n^(m)" << endl;
 			unsigned long long n ;
 			unsigned long long m ;
 			unsigned long long max_n = sqrt(9223372036854775808);
@@ -76,9 +80,17 @@ int main()
 		else if (mode == 3)
 		{
 			system("cls");
+			unsigned long long n;
+			unsigned long long m;
+			unsigned long long k;
+			unsigned long long M[100];
 			cout << "Выбраны перестановки с повторениями" << endl;
-			unsigned long long M[10];
-			cout << "\nЧисло комбинаций: " << permutation_repeat(20,5,M);
+			cout << "Формула для вычислений\nP_n(m_(1),m_(2),...m_(k)) )= (n!)/(m_(1)!*m_(2)!...m_(k)!)" << endl;
+			cout << "Введите число n\n>";
+			cin >> n;
+			cout << "Введите число k\n>";
+			cin >> k;
+			cout << "\nЧисло комбинаций: " << permutation_repeat(n,k,M);
 
 		}
 		else
