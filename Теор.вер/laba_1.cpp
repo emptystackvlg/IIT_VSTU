@@ -3,26 +3,26 @@
 #include <stdio.h>
 #include <math.h>
 using namespace std;
-unsigned long long factorial(unsigned long long a)
+unsigned long long factorial(int a)
 {
 	if (a == 1 || a == 0) return 1;
 	else return a * factorial(a - 1);
 }
-unsigned long long combination(unsigned long long n, unsigned long long m) //сочетания
+unsigned long long combination(int n, int m) //сочетания
 {
 	if (m == 0 || m == n) return 1;
 	else return combination(n - 1, m - 1) * n / m;
 }
 
 
-unsigned long long allocate_repeat(unsigned long long n, unsigned long long m) // размещения с повторениями
+unsigned long long allocate_repeat(int n, int m) // размещения с повторениями
 {
 
 	unsigned long long num_of_allocations = pow(n, m);
 	return num_of_allocations;
 }
 
-unsigned long long permutation_repeat(unsigned long long n, int k, unsigned long long M[20]) //перестановки с повторениями
+unsigned long long permutation_repeat(int n, int k, int M[20]) //перестановки с повторениями
 {
 	unsigned long long up = factorial(n);
 	unsigned long long result = 1;
@@ -43,7 +43,7 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	int mode = 0;
-	
+
 	while (mode != 1 && mode != 2 && mode != 3)
 	{
 	start:
@@ -55,11 +55,14 @@ int main()
 			system("cls");
 			cout << "Выбраны сочетания без повторений" << endl;
 			cout << "Формула для вычислений\nC_(n)^(m) = (n!)/(m!(n-m)!)" << endl;
-			unsigned long long n = 0;
-			unsigned long long m = 0;
+			int n = 0;
+			int m = 0;
+			int max_m = 0;
 			cout << "\nВведите n \n>";
 			cin >> n;
-			cout << "\nВведите m (m <= " << n << ")\n>";
+			if (n >= 70) max_m = n-15 ;
+			max_m = n;
+			cout << "\nВведите m (m <= " << max_m << ")\n>";
 			cin >> m;
 			cout << "\nЧисло комбинаций: " << combination(n, m) << endl;
 			system("pause");
@@ -70,12 +73,12 @@ int main()
 			system("cls");
 			cout << "Выбраны размещения с повторениями" << endl;
 			cout << "Формула для вычислений\nA_(n)^(m)=n^(m)" << endl;
-			unsigned long long n;
-			unsigned long long m;
+			int n;
+			int m;
 			unsigned long long max_n = sqrt(9223372036854775808);
 			cout << "\nВведите n (n < " << max_n << ")\n>";
 			cin >> n;
-			unsigned long long max_m = log(9223372036854775808) / log(n);
+			int max_m = log(9223372036854775808) / log(n);
 			cout << "\nВведите m (m <= " << max_m << ")\n>";
 			cin >> m;
 			cout << "\nЧисло комбинаций: " << allocate_repeat(n, m) << endl;
@@ -86,17 +89,17 @@ int main()
 		else if (mode == 3)
 		{
 			system("cls");
-			unsigned long long n;
-			unsigned long long m;
-			unsigned long long k;
-			unsigned long long M[100];
+			int n;
+			int m;
+			int k;
+			int M[100];
 			cout << "Выбраны перестановки с повторениями" << endl;
-			cout << "Формула для вычислений\nP_n(m_(1),m_(2),...m_(k)) )= (n!)/(m_(1)!*m_(2)!...m_(k)!)" << endl;
+			cout << "Формула для вычислений\nP_n(m_(1),m_(2)....m_(k)) )= (n!)/(m_(1)!*m_(2)!...m_(k)!)" << endl;
 			cout << "Введите число n\n>";
 			cin >> n;
 			cout << "Введите число k\n>";
 			cin >> k;
-			cout << "\nЧисло комбинаций: " << permutation_repeat(n, k, M)<<endl;
+			cout << "\nЧисло комбинаций: " << permutation_repeat(n, k, M) << endl;
 			system("pause");
 			goto start;
 		}
