@@ -67,15 +67,41 @@ float main_prob()
 			cout << "Выбрана формула Байеса\n\n";
 			cout << "P(Hi|A) = (P(Hi)*P(A|Hi))/P(A)\n\n";
 			float hyp_prob = 0;
-			for (int i = 0; i < num_of_events; i++)
+			int b_mode = 0;
+			cout << "Выберите режим:\n 1.Вывод всех условных вероятностей\n 2.Вывод части условных вероятностей\n> ";
+			cin >> b_mode;
+			if (b_mode == 1) 
+				for (int i = 0; i < num_of_events; i++)
+				{
+					hyp_prob = 0;
+					hyp_prob = (probs_of_hyps[i] * cond_probs[i]) / full_prob;
+					cout << "Условная вероятность гипотезы H_" << i + 1 << " при наступлении события A : " << hyp_prob << "\n\n";
+					system("pause");
+				}
+			else if (b_mode == 2)
 			{
-				hyp_prob = 0;
-				hyp_prob = (probs_of_hyps[i] * cond_probs[i]) / full_prob;
-				cout << "Вероятность гипотезы H_" << i + 1 << " при наступлении события A : " << hyp_prob << "\n\n";
-				system("pause");
+				int hyp_prob_to_show[100];
+				int count = 0;
+				int again = 1;
+				while (again != 0)
+				{
+					system("cls");
+					cout << "Введите номер i гипотезы, для которой хотите вывести значение условной вероятности\n> ";
+					cin >> hyp_prob_to_show[count];
+					count++;
+					cout << "\n\nХотите добавить еще одну гипотезу ? (0 - нет, 1 - да)\n> ";
+					cin >> again;
+				}
+				for (int i = 0; i < count; i++)
+				{
+					hyp_prob = 0;
+					hyp_prob = (probs_of_hyps[hyp_prob_to_show[i] -1] * cond_probs[hyp_prob_to_show[i] - 1]) / full_prob;
+					cout << "Условная вероятность гипотезы H_" << hyp_prob_to_show[i] << " при наступлении события A : " << hyp_prob << "\n\n";
+				}
+				
 			}
+			
 		}
-		
 	}
 	return 0;
 }
