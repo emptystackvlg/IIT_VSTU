@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 #include <math.h>
 using namespace std;
 
@@ -24,12 +23,25 @@ long double factorial(int f)
 long double polinom(int n, int k)
 {
     int mass_of_m[100];
+    
     float mass_of_probs[100];
-    for (int i = 0; i < k; i++)
-    {
-        cout << "Введите m" << i + 1 << "\n> ";
-        cin >> mass_of_m[i];
-    }
+    Input_m:
+        int current_m = 0;
+        int ex_n = n;
+        for (int i = 0; i < k; i++)
+        {
+            cout << "Введите m" << i + 1 << "(m)" << i+1 <<" <= " << ex_n << "\n> ";
+            cin >> mass_of_m[i];
+            current_m = mass_of_m[i];
+            ex_n -= current_m;
+        }
+        if (ex_n < 0)
+        {
+            cout << "Ошибка, сумма mi > n."<< endl;
+            system("pause");
+            system("cls");
+            goto Input_m;
+        }
     for (int i = 0; i < k; i++)
     {
         cout << "Введите p" << i + 1 << "\n> ";
@@ -45,7 +57,7 @@ long double polinom(int n, int k)
     }
     for (int i = 0; i < k; i++)
     {
-        prod *= pow(mass_of_probs[i],mass_of_m[i]);
+        prod *= pow(mass_of_probs[i], mass_of_m[i]);
     }
     prob = (up / down) * prod;
     return prob;
@@ -54,6 +66,7 @@ long double polinom(int n, int k)
 int main()
 {
     setlocale(LC_ALL, "rus");
+    cout << "Формула для расчета :\n(n!/m1!m2!...mk!) * p1^m1 * p2^m2 * ... * pk^mk" << "\n\n";
     int n, k;
     cout << "Введите n\n> ";
     cin >> n;
