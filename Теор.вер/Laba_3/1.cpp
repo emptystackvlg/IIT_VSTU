@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 #include <math.h>
 using namespace std;
 unsigned long long combination(int n, int m) //сочетания
@@ -32,29 +31,35 @@ int main()
     cin >> n;
     cout << "Введите p\n> ";
     cin >> p;
-    cout << "Введите m\n> ";
-    cin >> m;
     cout << "Выберите событие:\n 1) Pn(k = m)\n 2) Pn(k < m)\n 3) Pn(k => m)\n 4) Pn(m1 <= k <= m2)\n> ";
     cin >> mode;
     system("pause");
     system("cls");
+    if (mode == 1 || mode == 2 || mode == 3)
+    {
+        cout << "Введите m\n> ";
+        cin >> m;
+    }
     if (mode == 1)
     {
+        cout << "Формула для события Pn(k = m):\n\nPn(k=m) = C_(n)^(m) * p^m * q^(n-m)\n\n";
         prob = 0;
         prob = bernulli(p, n, m);
         cout << "Вероятность события Pn(k = m) равна : " << prob;
     }
     else if (mode == 2)
     {
+        cout << "Формула для события Pn(k = m):\n\nPn(k<m) = 1 - C_(n)^(m) * p^m * q^(n-m)\n\n";
         prob = 0;
-        prob = bernulli(p, n, m);   
+        prob = bernulli(p, n, m);
         prob = 1 - prob;
         cout << "Вероятность события Pn(k < m) равна : " << prob;
     }
     else if (mode == 3)
     {
+        cout << "Формула для события Pn(k => m):\n\nPn(k<m) = Сумма по i от m до n {C_(n)^(i) * p^i * q^(n-i)}\n\n";
         prob = 0;
-        for (int i = m; i <= n; i++)     
+        for (int i = m; i <= n; i++)
         {
             prob += bernulli(p, n, i);
         }
@@ -62,18 +67,19 @@ int main()
     }
     else if (mode == 4)
     {
+        "Формула для события Pn(k => m):\n\nPn(k<m) = Сумма по i от m1 до m2 {C_(n)^(i) * p^i * q^(n-i)}\n\n";
         prob = 0;
         cout << "Введите m1\n> ";
         cin >> m1;
         cout << "Введите m2\n> ";
         cin >> m2;
-        for (int i = m1; i <=m2; i++)   
+        for (int i = m1; i <= m2; i++)
         {
             prob += bernulli(p, n, i);
         }
-        cout << "Вероятность события Pn(m1 <= k <= m2) равна : "  << prob;
+        cout << "Вероятность события Pn(m1 <= k <= m2) равна : " << prob;
 
     }
-        
+
     return 0;
 }
