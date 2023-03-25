@@ -67,7 +67,7 @@ int main()
     }
     else if (mode == 4)
     {
-        "Формула для события Pn(k => m):\n\nPn(k<m) = Сумма по i от m1 до m2 {C_(n)^(i) * p^i * q^(n-i)}\n\n";
+        cout << "Формула для события Pn(k => m):\n\nPn(k<m) = Сумма по i от m1 до m2 {C_(n)^(i) * p^i * q^(n-i)}\n\n";
         prob = 0;
         cout << "Введите m1\n> ";
         cin >> m1;
