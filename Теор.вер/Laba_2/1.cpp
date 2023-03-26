@@ -1,33 +1,38 @@
 #include <iostream>
 #include <stdio.h>
-using namespace std ;
-void prob ()
+using namespace std;
+void prob()
 {
-    float probs [100];
-    for (int i = 0 ; i <6;i++)
+    float probs[100];
+    for (int i = 0; i < 6; i++)
     {
-        cout << "Введите вероятность отказа элемента № " << i+1<<"\n> ";
+        cout << "Введите вероятность отказа элемента № " << i + 1 << "\n> ";
         cin >> probs[i];
         cout << "\n";
     }
-    
-    //system ("clear");
-    cout << "Формула для события B-схема работает безотказно в течение времени T :"<<"\n\n";
+
+    cout << "Схема :" << "\n\n";
+    cout << "                   ---------------|   2   |---------------" << endl;
+    cout << "                 |                                        |" << endl;
+    cout << "o---|   1   |----|                                        |----|   3   |---o" << endl;
+    cout << "                 |                                        |" << endl;
+    cout << "                   ---|   4   |---|   5   |---|   6   |---" << endl;
+    cout << "\n\nФормула для события B-схема работает безотказно в течение времени T :" << "\n\n";
     cout << "B = !A1 * (!A2 + (!A4 * !A5 * !A6)) * !A3" << "\n\n";
-    cout <<"Формула для расчета вероятности события B" <<"\n\n";
-    cout << "P(B) = (1 -P(A1)) * ((1-P(A2)) + ((1-P(A4)) * (1-P(A5)) * (1-P(A6)))) * (1-P(A3))"<<"\n\n";
+    cout << "Формула для расчета вероятности события B" << "\n\n";
+    cout << "P(B) = (1 -P(A1)) * ((1-P(A2)) + ((1-P(A4)) * (1-P(A5)) * (1-P(A6)))) * (1-P(A3))" << "\n\n";
     float prob_of_b;
-    prob_of_b = (1 - probs[0]) * ((1 - probs[1]) + ((1-probs[3]) * (1-probs[4]) * (1-probs[5]))) * (1-probs [2]);
+    prob_of_b = (1 - probs[0]) * ((1 - probs[1]) + ((1 - probs[3]) * (1 - probs[4]) * (1 - probs[5]))) * (1 - probs[2]);
     cout << "Вероятность события B =" << prob_of_b;
-    
-    
+
+
 }
 
 
 
 int main()
 {
-    setlocale (LC_ALL,"rus");
-    prob ();
-  
+    setlocale(LC_ALL, "rus");
+    prob();
+
 }
