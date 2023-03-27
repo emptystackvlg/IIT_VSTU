@@ -4,7 +4,7 @@ using namespace std;
 void prob()
 {
     float probs[100];
-    cout << "Сехма:" << "\n\n";
+    cout << "Схема:" << "\n\n";
     cout << "       -|   2   |- " << endl;
     cout << "      |           |" << endl;
     cout << "     -             -|   3   |---|   4   |---" << endl;
