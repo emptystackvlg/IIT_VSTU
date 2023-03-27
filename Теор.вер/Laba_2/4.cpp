@@ -13,8 +13,8 @@ float main_prob()
 	float probs_of_hyps[100];
 	float cond_probs[100];
 	float sum_of_probs_of_hyps = 0;
-	
-	while (sum_of_probs_of_hyps !=1)
+
+	while (sum_of_probs_of_hyps != 1)
 	{
 		sum_of_probs_of_hyps = 0;
 		system("cls");
@@ -35,7 +35,7 @@ float main_prob()
 	system("cls");
 	for (int i = 0; i < num_of_events; i++)
 	{
-		cout << "Введите условную вероятность события A относительно гипотезы H_" << i + 1 <<"\n> ";
+		cout << "Введите условную вероятность события A относительно гипотезы H_" << i + 1 << "\n> ";
 		cin >> cond_probs[i];
 	}
 	cout << endl;
@@ -54,7 +54,7 @@ float main_prob()
 		if (mode == 0) return 0;
 		else if (mode == 1)
 		{
-			
+
 			system("cls");
 			cout << "Выбрана формула полной вероятности\n\n";
 			cout << "P(A) = сумма по i от 0 до n (P(Hi) * P(Hi|A)) " << "\n\n";
@@ -63,20 +63,19 @@ float main_prob()
 		}
 		else if (mode == 2)
 		{
-			system ("cls");
+			system("cls");
 			cout << "Выбрана формула Байеса\n\n";
 			cout << "P(Hi|A) = (P(Hi)*P(A|Hi))/P(A)\n\n";
 			float hyp_prob = 0;
 			int b_mode = 0;
 			cout << "Выберите режим:\n 1.Вывод всех условных вероятностей\n 2.Вывод части условных вероятностей\n> ";
 			cin >> b_mode;
-			if (b_mode == 1) 
+			if (b_mode == 1)
 				for (int i = 0; i < num_of_events; i++)
 				{
 					hyp_prob = 0;
 					hyp_prob = (probs_of_hyps[i] * cond_probs[i]) / full_prob;
 					cout << "Условная вероятность гипотезы H_" << i + 1 << " при наступлении события A : " << hyp_prob << "\n\n";
-					system("pause");
 				}
 			else if (b_mode == 2)
 			{
@@ -95,12 +94,12 @@ float main_prob()
 				for (int i = 0; i < count; i++)
 				{
 					hyp_prob = 0;
-					hyp_prob = (probs_of_hyps[hyp_prob_to_show[i] -1] * cond_probs[hyp_prob_to_show[i] - 1]) / full_prob;
+					hyp_prob = (probs_of_hyps[hyp_prob_to_show[i] - 1] * cond_probs[hyp_prob_to_show[i] - 1]) / full_prob;
 					cout << "Условная вероятность гипотезы H_" << hyp_prob_to_show[i] << " при наступлении события A : " << hyp_prob << "\n\n";
 				}
-				
+
 			}
-			
+
 		}
 	}
 	return 0;
@@ -110,5 +109,6 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 	main_prob();
-	
+	system("pause");
+	return 0;
 }

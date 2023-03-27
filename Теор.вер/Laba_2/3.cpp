@@ -77,6 +77,7 @@ void prob()
     cout << "c) " << odds[2] << "\n\n";
     cout << "d) " << odds[4] + odds[5] << "\n\n";
     cout << "d) " << 1 - odds[0] << "\n\n";
+    system("pause");
 
 }
 
