@@ -27,13 +27,12 @@ void prob()
 	for (int i = 0; i < 6; i++)
 	{
 		non_probs[i] = 1 - probs[i];
-		cout << non_probs [i] << "\n\n"; 
 
 	}
 
 	float prob_of_b;
 	float one = (non_probs[0] + non_probs[1]) - non_probs[0] * non_probs[1];
-	float two = non_probs [2] * non_probs[3];
+	float two = non_probs[2] * non_probs[3];
 	float three = non_probs[4] * non_probs[5];
 	prob_of_b = one * two + three;
 	cout << "Вероятность события B = " << prob_of_b << "\n\n";
