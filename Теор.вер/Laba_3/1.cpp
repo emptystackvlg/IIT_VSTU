@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <iomanip>
 using namespace std;
 unsigned long long combination(int n, int m) //сочетания
 {
@@ -49,10 +50,12 @@ int main()
     }
     else if (mode == 2)
     {
-        cout << "Формула для события Pn(k = m):\n\nPn(k<m) = 1 - C_(n)^(m) * p^m * q^(n-m)\n\n";
+        cout << "Формула для события Pn(k < m):\n\nPn(k<m) = 1 - C_(n)^(m) * p^m * q^(n-m)\n\n";
         prob = 0;
-        prob = bernulli(p, n, m);
-        prob = 1 - prob;
+        for (int i = 0; i <= m-1; i++)
+        {
+            prob += bernulli(p, n, i);
+        }
         cout << "Вероятность события Pn(k < m) равна : " << prob;
     }
     else if (mode == 3)
@@ -69,15 +72,15 @@ int main()
     {
         cout << "Формула для события Pn(k => m):\n\nPn(k<m) = Сумма по i от m1 до m2 {C_(n)^(i) * p^i * q^(n-i)}\n\n";
         prob = 0;
-        cout << "Введите m1\n> ";
+        cout << "Введите m1 (m1<=" <<n-1<<")\n> ";
         cin >> m1;
-        cout << "Введите m2\n> ";
+        cout << "Введите m2 ("<< m1 << " <m2<="<< n << " )\n> ";
         cin >> m2;
         for (int i = m1; i <= m2; i++)
         {
             prob += bernulli(p, n, i);
         }
-        cout << "Вероятность события Pn(m1 <= k <= m2) равна : " << prob;
+        cout << "Вероятность события Pn(m1 <= k <= m2) равна : " << setprecision (50)<<  prob;
 
     }
 
