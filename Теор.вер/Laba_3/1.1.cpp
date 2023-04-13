@@ -54,7 +54,7 @@ Input_p:
     }
     if (summ_of_p != 1)
     {
-        cout << "Ошибка, сумма вероятностей не равна 1  > n." << endl;
+        cout << "Ошибка, сумма вероятностей не равна 1." << endl;
         system("pause");
         system("cls");
         goto Input_p;
