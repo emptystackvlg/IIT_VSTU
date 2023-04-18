@@ -50,7 +50,7 @@ int main()
     }
     else if (mode == 2)
     {
-        cout << "Формула для события Pn(k < m):\n\nPn(k<m) = 1 - C_(n)^(m) * p^m * q^(n-m)\n\n";
+        cout << "Формула для события Pn(k < m):\n\nPn(k<m) = сумма по i от 0 до m-1 (C_(n)^(i) * p^i * q^(n-i)\n\n") 
         prob = 0;
         for (int i = 0; i <= m-1; i++)
         {
