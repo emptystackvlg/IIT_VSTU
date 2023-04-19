@@ -1,0 +1,36 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    float ui = 1;
+    float pc = 0;
+    float e = 0 ;
+    float pct = 0;
+    for (int t = 0; t<100;t+=2)
+    {
+
+
+        for (int i = 1; i<2; i++)
+        {
+            for (int j=1; j<i-1;j++)
+            {
+
+                ui *= (j+1/0.5);
+                pc = (ui/i)*pow((1-exp(0.021*t)),i);
+                //cout << ui<< endl;
+            }
+           ;
+        }
+        e = exp(-0.042*t);
+        pct = e * (1+pc);
+        cout << pct<< "\n";
+        
+
+
+    }
+
+    return 0;
+}
