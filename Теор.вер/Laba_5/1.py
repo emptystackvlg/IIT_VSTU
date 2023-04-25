@@ -4,14 +4,16 @@ import matplotlib.pyplot as plt
 from os import system
 from math import sqrt
 def input_var ():
-    system("cls")
-    path = fileopenbox (msg = "Выберите файл с данными")
-    
-    with open(path, "r") as file:
-        line = file.readline()
-        read_line = [float(x) for x in line.split()]
-        return (read_line)
-
+    try:
+        system("cls")
+        path = fileopenbox (msg = "Выберите файл с данными")
+        
+        with open(path, "r") as file:
+            line = file.readline()
+            read_line = [float(x) for x in line.split()]
+            return (read_line)
+    except TypeError:
+        input_var()
 
 def sort_mass (main_mass):
     sorted_mass = []
