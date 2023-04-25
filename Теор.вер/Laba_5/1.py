@@ -1,5 +1,6 @@
 from colorama import Fore,Back,Style
 from easygui import fileopenbox
+import matplotlib.pyplot as plt
 from os import system
 from math import sqrt
 def input_var ():
@@ -67,6 +68,15 @@ def params (mass,freq):
         summ += ((freq[i] - X_v)**2*mass[i])
     D_v = (1/n) * summ
     Sigma_v = sqrt(D_v)
+    return (X_v,D_v,Sigma_v)
+
+def make_plots (main_mass,mass_freq):
+    plt.grid()
+    plt.xlim (0,6)
+    plt.ylim (0,6)
+    plt.plot (main_mass,mass_freq, '-ro')
+    plt.show()
+
 
 
 def show_table (main_mass,mass_freq):
@@ -83,7 +93,11 @@ def show_table (main_mass,mass_freq):
 
 mass = input_var()
 mass.sort()
+
+freq_mass = freq(mass)
+main_mass = sort_mass (mass)
+make_plots (main_mass,freq_mass)
 #(F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
-params (sort_mass(mass),freq(mass))
+#print (params (sort_mass(mass),freq(mass)))
 
 #show_table (sort_mass(mass),freq(mass))
