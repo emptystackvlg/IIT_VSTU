@@ -60,6 +60,7 @@ def F_x (sort_mass,rel_freq):
     strings.append("F_x = " + str (variables[len(sort_mass)]) + "\t при \t\t" + "x > " + str(sort_mass[len(sort_mass)-1]))
     for i in strings:
         print (i + "\n\n")
+    return variables
 
 
 def params (mass,freq):
@@ -72,11 +73,11 @@ def params (mass,freq):
     Sigma_v = sqrt(D_v)
     return (X_v,D_v,Sigma_v)
 
-def make_plots (main_mass,mass_freq):
+def make_plots (main_mass,vars):
     plt.grid()
     plt.xlim (0,6)
-    plt.ylim (0,6)
-    plt.plot (main_mass,mass_freq, '-ro')
+    plt.ylim (0,1.5)
+    plt.plot (main_mass,vars, '-ro')
     plt.show()
 
 
@@ -96,10 +97,12 @@ def show_table (main_mass,mass_freq):
 mass = input_var()
 mass.sort()
 
-freq_mass = freq(mass)
-main_mass = sort_mass (mass)
-make_plots (main_mass,freq_mass)
-#(F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
+vars = (F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
+sorted_mass = sort_mass(mass)
+sorted_mass.insert(0,0)
+
+make_plots (sorted_mass,vars)
+
 #print (params (sort_mass(mass),freq(mass)))
 
 #show_table (sort_mass(mass),freq(mass))
