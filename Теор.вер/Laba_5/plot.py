@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plot
-x = [1,2,3,4]
-y = [25.2,32,34,20]
-plot.plot (x,y)
+plot.plot (0,1)
+x = [1,3,3,6]
+y = [2,2,3,3]
+plot.plot(x,y)
 plot.show()
