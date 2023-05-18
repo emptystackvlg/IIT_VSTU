@@ -26,7 +26,7 @@ def freq (main_list):
     old_i = []
     for i in main_list:
             if (i not in old_i):
-                mass_freq.append(main_list.count(i))
+                mass_freq.append(float (main_list.count(i)))
             old_i.append(i)
     return (mass_freq)
 
@@ -73,12 +73,22 @@ def params (mass,freq):
     Sigma_v = sqrt(D_v)
     return (X_v,D_v,Sigma_v)
 
-def make_plots (main_mass,vars):
+def make_plots (mass_x,mass_y):
+    plt.rcdefaults()
     plt.grid()
-    plt.xlim (0,6)
-    plt.ylim (0,1.5)
-    plt.plot (main_mass,vars, '-ro')
+    plt.xlim (0,max(mass_x)+1)
+    plt.ylim (0,max (mass_y)+1)
+    plt.xlabel (r'$xi$')
+    plt.ylabel(r'$ni$')
+    plt.title ("Полигон частот")
+    for i in range (len(mass_x)):
+            x = mass_x[i]
+            y = mass_y[i]
+            string = ("(" + str(x) + "," + str(y) + ")")
+            plt.text(x-0.3,y+0.3,string)
+    plt.plot (mass_x,mass_y, '-rx',markersize = 9)
     plt.show()
+    
 
 
 
@@ -99,9 +109,8 @@ mass.sort()
 
 vars = (F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
 sorted_mass = sort_mass(mass)
-sorted_mass.insert(0,0)
 
-make_plots (sorted_mass,vars)
+make_plots (sorted_mass,freq(mass))
 
 #print (params (sort_mass(mass),freq(mass)))
 
