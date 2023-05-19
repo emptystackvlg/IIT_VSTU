@@ -1,71 +1,44 @@
 from os import system
 from math import sqrt,fabs,log10,floor,ceil
 try:
-    from easygui import fileopenbox
     import matplotlib.pyplot as plt
 
 except:
-    system ("pip install easygui")
     system ("pip install matplotlib")
     print ("\n\n")
     print (" Все необходимые библиотеки установлены, запустите программу заново\n")
     system ("pause")
     exit (0)
-def input_var () -> list:
-    system("cls")
-    path = fileopenbox (msg = "Выберите файл с данными")
-    temp_mass = []
-    main_mass = []
-    with open(path, "r") as file:
-        lines = file.readlines()
-        for line in lines: 
-            read_line = [float(x) for x in line.split()]
-            temp_mass.append(read_line)
-        for i in range (len(temp_mass)):
-            for j in temp_mass[i] :
-                main_mass.append(j)
-    return (main_mass)
 
-def make_intervals (main_mass) -> dict:
-    intervals = {}
-    x_min = min(main_mass)
-    x_max = max(main_mass)
-    k = 1 + 3.322 * log10(len(main_mass))
-    k = floor(k)
-    print ("Оптимальное количество интервалов : " + str(k) + "\n")
-    num_of_intervals = int (input("Введите количество интервалов\n> "))
+
+def make_intervals () -> dict:
     global h
-    h = (x_max - x_min)/num_of_intervals
-    if (h >= 0.5):  
-        dh = fabs(float ((ceil(h) - h)))
-        dh *= num_of_intervals
-        dh = (float("{0:.8f}".format(dh)))
-        dh /= 2
-        h = ceil(h)
-        if (dh == 0):
-            h += 0.0001
-    else :
-        h = round(h,6)
-        h += 0.0001   
-        dh = 0
-    current_x = float ("{0:.4f}".format (x_min - dh))
+    global num_of_intervals
+    global min_x
+    global max_x
+    intervals = {}
+    print (" Введите количество интервалов : \n")
+    num_of_intervals = int (input("> "))
+    print ("\n Введите начальное значение x :\n")
+    min_x = float (input("> "))
+    print ("\n Введите конечное значение x :\n")
+    max_x = float(input("> "))
+    h = float (max_x - min_x)/num_of_intervals
+    h = float ("{0:.2f}".format (h))
+    current_x = float ("{0:.2f}".format (min_x))
     for i in range (num_of_intervals):
-        intervals [i] = [float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*i)),float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*(i+1)))]
+        intervals [i] = [round(current_x,2) + round(h*i,2),round(current_x,2) + round(h*(i+1),2)]
     return intervals
 
-def intervals_freq (main_mass,intervals) -> list:
-    freq_intervals = []
-    for key in intervals.keys():
-        ni = 0 
-        for var in main_mass:
-            if (intervals[key][0]<= var <intervals[key][1]):
-                ni += 1
-        freq_intervals.append (ni) 
-    if (sum (freq_intervals) == len (main_mass)):
-        return freq_intervals            
-    else :
-        print ("Ошибка, сумма ni != n")
-        exit(0)
+def intervals_freq (intervals):
+    freq = []
+    for i in range (num_of_intervals):
+        print ("Введите ni для интервала [ " + str (intervals[i][0]) + " ; " + str (intervals[i][1]) + " ) \n")
+        int_freq = float (input("> "))
+        freq.append (int_freq)
+        print ("\n")
+    return freq
+
 def relative_freq (mass_of_ni, count_n) -> list:
     rel_freq = []
     for ni in mass_of_ni:
@@ -85,12 +58,12 @@ def params (mass_of_ni,mid,n) -> list:
     summ = 0
     for i in range (len(mass_of_ni)):
         summ += mass_of_ni [i] * mid[i]
-    x_v = float("{0:.3f}".format(summ/n))
+    x_v = float("{0:.2f}".format(summ/n))
     summ = 0
     for i in range (len(mass_of_ni)):
         summ += mass_of_ni[i] * ((mid[i] - x_v)**2)
-    d_v = float("{0:.3f}".format(summ/len (mass_of_ni)))
-    Sigma_v = float("{0:.3f}".format(sqrt (d_v)))
+    d_v = float("{0:.2f}".format(summ/len (mass_of_ni)))
+    Sigma_v = float("{0:.2f}".format(sqrt (d_v)))
     parametrs = [x_v, d_v,Sigma_v]
     return parametrs
 
@@ -173,7 +146,7 @@ def hyst_of_freq (x,intervals):
         plt.xlim (min(sorted_intervals) - 1,max(sorted_intervals) + 1)
     nh = []
     for n in x:
-        nh.append(float("{0:.3f}".format(n/h)))
+        nh.append(float("{0:.2f}".format(n/h)))
     mass_x = []
     for x in sorted_intervals:
         if (x == sorted_intervals[0]) :
@@ -225,11 +198,11 @@ def hyst_of_rel_freq (freq_y,intervals):
     mass_y.append(0)
     for y in freq_y:
         for i in range (2):
-            mass_y.append(float("{0:.3f}".format(y/h)))
+            mass_y.append(float("{0:.2f}".format(y/h)))
         mass_y.append(0)
     y_to_plot = []
     for yp in freq_y:
-        y_to_plot.append(float("{0:.3f}".format(yp/h)))
+        y_to_plot.append(float("{0:.2f}".format(yp/h)))
     if (min(sorted_intervals) >= 0):
         plt.xlim (min(sorted_intervals) - 1,max(sorted_intervals) + 1)
     else :
@@ -272,11 +245,11 @@ def polygon_of_rel_freq (mids,rel_freq):
 
 
 
-main_mass = input_var()
-main_mass.sort()
 
-intervals = make_intervals(main_mass)
-
+intervals = make_intervals()
+system ("pause")
+system ("cls")
+mass_freq = intervals_freq(intervals)
 def menu():
     system("cls")
     print ("Выберите нужный пункт : \n")
@@ -293,16 +266,13 @@ def menu():
         if (i not in sorted_intervals):
             sorted_intervals.append(i)
 
-    mass_freq = intervals_freq (main_mass,intervals)
-    mass_rel_freq = relative_freq(mass_freq,len(main_mass))
+    mass_rel_freq = relative_freq(mass_freq,sum(mass_freq))
     mids = mid_of_intervals(intervals)
     if (mode == 0):
         system("cls")
         exit(0)
     elif (mode == 1):
         system ("cls")
-        print (" Вариационный ряд: \n\n\t" + str (main_mass))
-        print ("\n")
         print (" Интервалы: \n")
         for i in range (len(intervals.values())):
             print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
@@ -312,14 +282,14 @@ def menu():
         system ("cls")
         print (" Интервальный ряд частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
             print (" Частота : " + str (mass_freq[i]) + "\n")
         hyst_of_freq(mass_freq,intervals)
         system("pause")
         system("cls")
         print (" Интервальный ряд относительных частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
             print (" Относительная частота : " + str (mass_rel_freq[i]) + "\n")
         hyst_of_rel_freq(mass_rel_freq,intervals)
         system ("pause")
@@ -328,7 +298,7 @@ def menu():
         system ("cls")
         print (" Группированный ряд распределения частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] )+ "\n")
+            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] ))
             print (" Частота : " + str (mass_freq[i]) + "\n")
         polygon_of_freq(mids,mass_freq)
         system("pause")
@@ -358,7 +328,7 @@ def menu():
         menu ()
     elif (mode == 6):
         system("cls")
-        parameters = params(mass_freq,mids,len(main_mass))
+        parameters = params(mass_freq,mids,sum(mass_freq))
         print (" Числовые параметры выборки : \n")
         print ("\tX_v = " + str(parameters[0]) + "\n")
         print ("\tD_v = " + str(parameters[1]) + "\n")
