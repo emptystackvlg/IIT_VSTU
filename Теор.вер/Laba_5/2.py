@@ -1,9 +1,16 @@
-from colorama import Fore,Back,Style
-from easygui import fileopenbox
-import matplotlib.pyplot as plt
 from os import system
 from math import sqrt,fabs,log10,floor
+try:
+    from easygui import fileopenbox
+    import matplotlib.pyplot as plt
 
+except:
+    system ("pip install easygui")
+    system ("pip install matplotlib")
+    print ("\n\n")
+    print (" Все необходимые библиотеки установлены, запустите программу заново\n")
+    system ("pause")
+    exit (0)
 def input_var () -> list:
     system("cls")
     path = fileopenbox (msg = "Выберите файл с данными")
@@ -39,7 +46,8 @@ def make_intervals (main_mass) -> dict:
             h += 0.001
     else :
         h = round(h,4)
-        h += 0.001   
+        #h = floor (h)
+        h += 0.0001   
         dh = 0 
     current_x = float ("{0:.4f}".format (x_min - dh))
     for i in range (int (num_of_intervals)):
