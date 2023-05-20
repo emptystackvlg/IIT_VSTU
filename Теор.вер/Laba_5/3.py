@@ -1,5 +1,5 @@
 from os import system,path,chdir,mkdir
-from math import sqrt,fabs,log10,floor,ceil
+from math import sqrt
 try:
     import matplotlib.pyplot as plt
 

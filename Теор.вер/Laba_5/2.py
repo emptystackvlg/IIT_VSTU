@@ -1,4 +1,4 @@
-from os import system,path
+from os import system,path,chdir,mkdir
 from math import sqrt,fabs,log10,floor,ceil
 try:
     from easygui import fileopenbox
@@ -284,9 +284,10 @@ def polygon_of_rel_freq (mids,rel_freq):
 
 main_mass = input_var()
 main_mass.sort()
-
 intervals = make_intervals(main_mass)
 
+mkdir("2_images")
+chdir("2_images")
 def menu():
     system("cls")
     print ("Выберите нужный пункт : \n")
@@ -306,6 +307,7 @@ def menu():
     mass_freq = intervals_freq (main_mass,intervals)
     mass_rel_freq = relative_freq(mass_freq,len(main_mass))
     mids = mid_of_intervals(intervals)
+    
     if (mode == 0):
         system("cls")
         exit(0)

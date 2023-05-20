@@ -1,7 +1,15 @@
-from easygui import fileopenbox
-import matplotlib.pyplot as plt
 from os import system,path
 from math import sqrt
+try:
+    from easygui import fileopenbox
+    import matplotlib.pyplot as plt
+except:
+    system ("pip install easygui")
+    system ("pip install matplotlib")
+    print ("\n\n")
+    print (" Все необходимые библиотеки установлены, запустите программу заново\n")
+    system ("pause")
+    exit (0)
 def input_var ():
     system("cls")
     path_f = fileopenbox (msg = "Выберите файл с данными")
