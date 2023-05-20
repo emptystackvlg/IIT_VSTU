@@ -1,4 +1,4 @@
-from os import system,path
+from os import system,path,chdir,mkdir
 from math import sqrt
 try:
     from easygui import fileopenbox
@@ -210,6 +210,9 @@ def menu ():
 
 mass = input_var()
 mass.sort()
+if (path.exists("1_images") == False):
+    mkdir("1_images")
+chdir("1_images")
 menu()
 
 

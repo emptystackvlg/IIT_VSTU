@@ -285,8 +285,8 @@ def polygon_of_rel_freq (mids,rel_freq):
 main_mass = input_var()
 main_mass.sort()
 intervals = make_intervals(main_mass)
-
-mkdir("2_images")
+if (path.exists("2_images") == False):
+    mkdir("2_images")
 chdir("2_images")
 def menu():
     system("cls")

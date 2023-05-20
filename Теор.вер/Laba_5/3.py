@@ -262,7 +262,8 @@ intervals = make_intervals()
 system ("pause")
 system ("cls")
 mass_freq = intervals_freq(intervals)
-mkdir("3_images")
+if (path.exists("3_images") == False):
+    mkdir("3_images")
 chdir("3_images")
 def menu():
     system("cls")
