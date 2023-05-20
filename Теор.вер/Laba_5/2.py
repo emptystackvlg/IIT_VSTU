@@ -1,4 +1,4 @@
-from os import system
+from os import system,path
 from math import sqrt,fabs,log10,floor,ceil
 try:
     from easygui import fileopenbox
@@ -142,6 +142,8 @@ def plot_of_fx (sorted_intervals,variables):
     plt.title ("График эмпирической функции распределения\nдля интервального ряда")
     plt.ylim(0,1.05)
     plt.plot (sorted_intervals,variables,'-bo')
+    plt.savefig('plot_of_int_fx.png')
+    print ("\n График сохранён в директории " + str(path.abspath('plot_of_int_fx.png')) + "\n")
     plt.show()
 
 
@@ -154,6 +156,8 @@ def plot_of_fx_group (mids,variables):
     plt.title ("График эмпирической функции распределения\nдля группированного ряда")
     plt.ylim(0,1.05)
     plt.plot (mids,variables,'-ro')
+    plt.savefig('plot_of_group_fx.png')
+    print ("\n График сохранён в директории " + str(path.abspath('plot_of_group_fx.png')) + "\n")
     plt.show()
 
 
@@ -201,6 +205,8 @@ def hyst_of_freq (x,intervals):
     plt.ylabel(r'$ni/h$')
     plt.ylim (0,max(nh) + 5)
     plt.plot (mass_x,mass_y,'r')
+    plt.savefig('hyst_of_freq.png')
+    print ("\n Гистограмма сохранёна в директории " + str(path.abspath('hyst_of_freq.png')) + "\n")
     plt.show()
 
 def hyst_of_rel_freq (freq_y,intervals):
@@ -242,6 +248,8 @@ def hyst_of_rel_freq (freq_y,intervals):
     plt.yticks(y_to_plot)
     plt.ylim (0,max(mass_y)+ 0.1)
     plt.plot (mass_x,mass_y)
+    plt.savefig('hyst_of_rel_freq.png')
+    print ("\n Гистограмма сохранёна в директории " + str(path.abspath('hyst_of_rel_freq.png')) + "\n")
     plt.show()
 
 
@@ -255,6 +263,8 @@ def polygon_of_freq(mids,freq):
     plt.ylim (0,max(freq)+ 1)
     plt.xlim (min(mids) - 1,max(mids) + 1)
     plt.plot (mids,freq,'-ro')
+    plt.savefig('pol_of_freq.png')
+    print ("\n Полигон сохранён в директории " + str(path.abspath('pol_of_freq.png')) + "\n")
     plt.show()
 
 def polygon_of_rel_freq (mids,rel_freq):
@@ -267,10 +277,10 @@ def polygon_of_rel_freq (mids,rel_freq):
     plt.ylim (0,max(rel_freq)+ 0.1)
     plt.xlim (min(mids) - 1,max(mids) + 1)
     plt.plot (mids,rel_freq,'-ro')
+    plt.savefig('pol_of_rel_freq.png')
+    print ("\n Полигон сохранён в директории " + str(path.abspath('pol_of_rel_freq.png')) + "\n")
     plt.show()
-
-
-
+    
 
 main_mass = input_var()
 main_mass.sort()
@@ -305,21 +315,21 @@ def menu():
         print ("\n")
         print (" Интервалы: \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
         system("pause")
         menu()
     elif (mode == 2):
         system ("cls")
         print (" Интервальный ряд частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
             print (" Частота : " + str (mass_freq[i]) + "\n")
         hyst_of_freq(mass_freq,intervals)
         system("pause")
         system("cls")
         print (" Интервальный ряд относительных частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
             print (" Относительная частота : " + str (mass_rel_freq[i]) + "\n")
         hyst_of_rel_freq(mass_rel_freq,intervals)
         system ("pause")
@@ -328,14 +338,14 @@ def menu():
         system ("cls")
         print (" Группированный ряд распределения частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] )+ "\n")
+            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] ))
             print (" Частота : " + str (mass_freq[i]) + "\n")
         polygon_of_freq(mids,mass_freq)
         system("pause")
         system("cls")
         print (" Группированный ряд распределения относительных частот : \n")
         for i in range (len(intervals.values())):
-            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] )+ "\n")
+            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] ))
             print (" Относительная частота : " + str (mass_rel_freq[i]) + "\n")
         polygon_of_rel_freq(mids,mass_rel_freq)
         system ("pause")
