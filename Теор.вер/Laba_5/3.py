@@ -257,7 +257,7 @@ def polygon_of_rel_freq (mids,rel_freq):
 
 
 
-
+system ("cls")
 intervals = make_intervals()
 system ("pause")
 system ("cls")
@@ -345,9 +345,12 @@ def menu():
         system("cls")
         parameters = params(mass_freq,mids,sum(mass_freq))
         print (" Числовые параметры выборки : \n")
-        print ("\tX_v = " + str(parameters[0]) + "\n")
-        print ("\tD_v = " + str(parameters[1]) + "\n")
-        print ("\tSigma_v = " + str(parameters[2]) + "\n")
+        print ("\tX (в) = (1/n) * (Сумма по i от 1 до k (c(i)n(i))) \n")
+        print ("\tD (в) = (1/n) (Сумма по i от 1 до k ((c(i)-x(в))^2n(i)) \n")
+        print ("\tSigma (в) = sqrt(D(в)) \n")
+        print ("\tX (в) = " + str(parameters[0]) + "\n")
+        print ("\tD (в) = " + str(parameters[1]) + "\n")
+        print ("\tSigma (в) = " + str(parameters[2]) + "\n")
         print ("\n")
         system ("pause")
         menu ()
