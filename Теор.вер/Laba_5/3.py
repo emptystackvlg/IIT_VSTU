@@ -347,7 +347,7 @@ def menu():
         print (" Числовые параметры выборки : \n")
         print ("\tX (в) = (1/n) * (Сумма по i от 1 до k (c(i)n(i))) \n")
         print ("\tD (в) = (1/n) (Сумма по i от 1 до k ((c(i)-x(в))^2n(i)) \n")
-        print ("\tSigma (в) = sqrt(D(в)) \n")
+        print ("\tSigma (в) = sqrt(D (в)) \n")
         print ("\tX (в) = " + str(parameters[0]) + "\n")
         print ("\tD (в) = " + str(parameters[1]) + "\n")
         print ("\tSigma (в) = " + str(parameters[2]) + "\n")

@@ -1,4 +1,4 @@
 # IIT_VSTU
 
-![download](https://user-images.githubusercontent.com/57997351/191555486-ec81e354-36aa-4010-bf24-05afe6f89c43.jpg)
 
+![shlyapa_evreiskaya2-PhotoRoom png](https://github.com/emptystackvlg/IIT_VSTU/assets/57997351/4a66ef79-967d-4e72-b6e6-be84b3ab35da)
