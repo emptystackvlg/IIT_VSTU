@@ -64,7 +64,7 @@ def F_x (sort_mass,rel_freq):
     strings = []
     variables_to_show = []
     for var in variables:
-        var = float("{0:.3f}".format(var))
+        var = float("{0:.4f}".format(var))
         variables_to_show.append(var)
     for i in range (len(sort_mass)):
         if (i == 0):
