@@ -81,7 +81,7 @@ def mid_of_intervals (intervals) -> list:
     return mid
 
 def params (mass_of_ni,mid,n) -> list:
-    x_v = 1 
+    x_v = 0 
     summ = 0
     for i in range (len(mass_of_ni)):
         summ += mass_of_ni [i] * mid[i]
@@ -360,7 +360,7 @@ def menu():
         print ("\n")
         system("pause")
         menu()
-    elif (mode == 5) :
+    elif (mode == 5):
         system ("cls")
         print (" Эмпирическая функция распределения для группированного ряда : \n")
         vars = F_x_group(mids,mass_rel_freq)
