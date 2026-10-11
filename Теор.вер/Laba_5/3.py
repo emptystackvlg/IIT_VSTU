@@ -3,19 +3,19 @@ from math import sqrt
 try:
     import matplotlib.pyplot as plt
 
-except:
+except ModuleNotFoundError:
     system ("pip install matplotlib")
     print ("\n\n")
     print (" Все необходимые библиотеки установлены, запустите программу заново\n")
     system ("pause")
     exit (0)
 
-
 def make_intervals () -> dict:
     global h
     global num_of_intervals
     global min_x
     global max_x
+
     intervals = {}
     print (" Введите количество интервалов : \n")
     num_of_intervals = int (input("> "))
